@@ -1,15 +1,17 @@
-#!/bin/bash 
-#START METHOD FOR THE FIRST INDEXING OF OPENGROK
+#!/bin/bash
+#START METHOD FOR INDEXING OF OPENGROK
 start_opengrok(){
     # wait for tomcat startup
-    while ! ( ps aux|grep -q org.apache.catalina.startup.Bootstrap ); do
+    date +"%R Waiting for tomcat startup..">>/opengrok/indexing.log
+    while ! ( grep -q "org.apache.catalina.startup.Catalina.start Server startup"  /usr/local/tomcat/logs/catalina.*.log ); do
         sleep 1;
     done
-    OpenGrok index /src
+    date +"%R Startup finished..">>/opengrok/indexing.log
+    /scripts/index.sh
 }
 
-#START ALL NECESSARY SERVICES.
-start_opengrok &
+#START ALL NECESSARY SERVICES.	
+start_opengrok & 
+catalina.sh run &
 cron &
-/usr/sbin/sshd -D &
-catalina.sh run
+/usr/sbin/sshd -D
