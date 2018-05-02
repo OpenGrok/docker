@@ -36,7 +36,12 @@ ENV JRE_HOME /usr
 ENV CLASSPATH /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
 
 WORKDIR $CATALINA_HOME
-RUN /opengrok/bin/OpenGrok deploy
+
+# custom deployment to / with redirect from /source
+RUN rm -rf /usr/local/tomcat/webapps/* && \
+    cp "/opengrok/lib/source.war" "/usr/local/tomcat/webapps/ROOT.war" && \
+    mkdir "/usr/local/tomcat/webapps/source" && \
+    echo '<% response.sendRedirect("/"); %>' > "/usr/local/tomcat/webapps/source/index.jsp"
 
 EXPOSE 8080
 EXPOSE 22
