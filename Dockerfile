@@ -25,6 +25,7 @@ RUN chmod 0644 /etc/cron.d/opengrok-cron
 #ENVIRONMENT VARIABLES CONFIGURATION
 ENV SRC_ROOT /src
 ENV DATA_ROOT /data
+ENV OPENGROK_WEBAPP_CONTEXT /
 ENV OPENGROK_TOMCAT_BASE /usr/local/tomcat
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -39,7 +40,8 @@ WORKDIR $CATALINA_HOME
 
 # custom deployment to / with redirect from /source
 RUN rm -rf /usr/local/tomcat/webapps/* && \
-    cp "/opengrok/lib/source.war" "/usr/local/tomcat/webapps/ROOT.war" && \
+    /opengrok/bin/OpenGrok deploy && \
+    mv "/usr/local/tomcat/webapps/source.war" "/usr/local/tomcat/webapps/ROOT.war" && \
     mkdir "/usr/local/tomcat/webapps/source" && \
     echo '<% response.sendRedirect("/"); %>' > "/usr/local/tomcat/webapps/source/index.jsp"
 
