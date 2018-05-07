@@ -19,6 +19,6 @@ First inspect the docker container so you can find the address to connect, then 
 * pass:root
 
 ## Default URL:
-localhost:8080/source
+localhost:8080/
 
 Enjoy.
