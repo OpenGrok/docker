@@ -32,7 +32,6 @@ ENV CATALINA_TMPDIR /usr/local/tomcat/temp
 ENV JRE_HOME /usr
 ENV CLASSPATH /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
 
-WORKDIR $CATALINA_HOME
 
 # custom deployment to / with redirect from /source
 RUN rm -rf /usr/local/tomcat/webapps/* && \
@@ -41,9 +40,16 @@ RUN rm -rf /usr/local/tomcat/webapps/* && \
     mkdir "/usr/local/tomcat/webapps/source" && \
     echo '<% response.sendRedirect("/"); %>' > "/usr/local/tomcat/webapps/source/index.jsp"
 
-EXPOSE 8080
-EXPOSE 22
+# disable all file logging
+ADD logging.properties /usr/local/tomcat/conf/logging.properties
+RUN sed -i -e 's/Valve/Disabled/' /usr/local/tomcat/conf/server.xml
 
+# add our scripts
 ADD scripts /scripts
 RUN chmod -R +x /scripts
+
+# run
+WORKDIR $CATALINA_HOME
+EXPOSE 8080
+EXPOSE 22
 CMD ["/scripts/start.sh"]
