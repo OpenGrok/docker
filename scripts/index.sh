@@ -11,4 +11,4 @@ touch $LOCKFILE
 date +"%F %T Indexing starting"
 /opengrok/bin/OpenGrok index /src
 rm -f $LOCKFILE
-date +"%F %T Indexing finishing"
+date +"%F %T Indexing finished"

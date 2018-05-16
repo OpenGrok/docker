@@ -10,17 +10,13 @@ RUN ln -s /data /var/opengrok
 RUN ln -s /src /var/opengrok/src
 
 #INSTALLING DEPENDENCIES
-RUN apt-get update && apt-get install -y exuberant-ctags git subversion mercurial unzip openssh-server cron inotify-tools
+RUN apt-get update && apt-get install -y exuberant-ctags git subversion mercurial unzip openssh-server inotify-tools
 
 #SSH configuration
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/[ #]*PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/[ #]*UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-# CRON for Reindex configuration
-RUN echo "*/10 * * * * root  /scripts/index.sh" > /etc/cron.d/opengrok-cron
-RUN chmod 0644 /etc/cron.d/opengrok-cron
 
 #ENVIRONMENT VARIABLES CONFIGURATION
 ENV SRC_ROOT /src
