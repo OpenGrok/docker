@@ -1,5 +1,14 @@
 #!/bin/bash
 
-date +"%R Indexing starting">>/opengrok/indexing.log
-/opengrok/bin/OpenGrok index /src >>/opengrok/indexing.log
-date +"%R Indexing finishing">>/opengrok/indexing.log
+LOCKFILE=/var/run/opengrok-indexer
+
+if [ -f "$LOCKFILE" ]; then
+    date +"%F %T Indexer still locked, skipping indexing"
+    exit 1
+fi
+
+touch $LOCKFILE
+date +"%F %T Indexing starting"
+/opengrok/bin/OpenGrok index /src
+rm -f $LOCKFILE
+date +"%F %T Indexing finished"
