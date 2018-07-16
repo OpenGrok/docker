@@ -3,20 +3,19 @@ MAINTAINER Nathan Guimaraes "dev.nathan.guimaraes@gmail.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
 ADD https://github.com/OpenGrok/OpenGrok/releases/download/1.0/opengrok-1.0.tar.gz /opengrok.tar.gz
-RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && chmod -R +x /opengrok/bin
-RUN mkdir /src
-RUN mkdir /data
-RUN ln -s /data /var/opengrok
-RUN ln -s /src /var/opengrok/src
+RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && chmod -R +x /opengrok/bin && \
+    mkdir /src && \
+    mkdir /data && \
+    ln -s /data /var/opengrok && \
+    ln -s /src /var/opengrok/src
 
 #INSTALLING DEPENDENCIES
-RUN apt-get update && apt-get install -y exuberant-ctags git subversion mercurial unzip openssh-server inotify-tools
-
 #SSH configuration
-RUN mkdir /var/run/sshd
-RUN echo 'root:root' |chpasswd
-RUN sed -ri 's/[ #]*PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/[ #]*UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN apt-get update && apt-get install -y exuberant-ctags git subversion mercurial unzip openssh-server inotify-tools && \
+    mkdir /var/run/sshd && \
+    echo 'root:root' |chpasswd && \
+    sed -ri 's/[ #]*PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/[ #]*UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 #ENVIRONMENT VARIABLES CONFIGURATION
 ENV SRC_ROOT /src
