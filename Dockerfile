@@ -2,7 +2,7 @@ FROM tomcat:9-jre8
 MAINTAINER Nathan Guimaraes "dev.nathan.guimaraes@gmail.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
-ADD https://github.com/OpenGrok/OpenGrok/releases/download/1.0/opengrok-1.0.tar.gz /opengrok.tar.gz
+ADD https://github.com/oracle/OpenGrok/releases/download/1.0/opengrok-1.0.tar.gz /opengrok.tar.gz
 RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && chmod -R +x /opengrok/bin && \
     mkdir /src && \
     mkdir /data && \
