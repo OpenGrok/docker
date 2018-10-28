@@ -11,11 +11,16 @@ RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && chmod -R +x /opengr
 
 #INSTALLING DEPENDENCIES
 #SSH configuration
-RUN apt-get update && apt-get install -y exuberant-ctags git subversion mercurial unzip openssh-server inotify-tools && \
+RUN apt-get update && apt-get install -y git subversion mercurial unzip openssh-server inotify-tools && \
     mkdir /var/run/sshd && \
     echo 'root:root' |chpasswd && \
     sed -ri 's/[ #]*PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -ri 's/[ #]*UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+# compile and install universal-ctags
+RUN apt-get install -y pkg-config autoconf build-essential && git clone https://github.com/universal-ctags/ctags /root/ctags && \
+    cd /root/ctags && ./autogen.sh && ./configure && make && make install && \
+    apt-get remove -y autoconf build-essential && apt-get -y autoremove && apt-get -y autoclean && \
+    cd /root && rm -rf /root/ctags
 
 #ENVIRONMENT VARIABLES CONFIGURATION
 ENV SRC_ROOT /src
