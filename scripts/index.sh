@@ -9,7 +9,7 @@ fi
 
 touch $LOCKFILE
 date +"%F %T Indexing starting"
-opengrok-indexer -J=-Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties \
+opengrok-indexer \
     -a /opengrok/lib/opengrok.jar -- \
     -s /src -d /data -H -P -S -G \
     -W /var/opengrok/etc/configuration.xml -U http://localhost:8080

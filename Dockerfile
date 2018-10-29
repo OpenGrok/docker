@@ -6,6 +6,7 @@ ADD https://github.com/oracle/opengrok/releases/download/1.1-rc68/opengrok-1.1-r
 RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && \
     mkdir /src && \
     mkdir /data && \
+    mkdir -p /var/opengrok/etc/ && \
     ln -s /data /var/opengrok && \
     ln -s /src /var/opengrok/src
 
@@ -39,8 +40,7 @@ ENV CLASSPATH /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-j
 
 # custom deployment to / with redirect from /source
 RUN rm -rf /usr/local/tomcat/webapps/* && \
-    opengrok-deploy /opengrok/lib/source.war /usr/local/tomcat/webapps && \
-    mv "/usr/local/tomcat/webapps/source.war" "/usr/local/tomcat/webapps/ROOT.war" && \
+    opengrok-deploy /opengrok/lib/source.war /usr/local/tomcat/webapps/ROOT.war && \
     mkdir "/usr/local/tomcat/webapps/source" && \
     echo '<% response.sendRedirect("/"); %>' > "/usr/local/tomcat/webapps/source/index.jsp"
 
