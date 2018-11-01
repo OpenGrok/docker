@@ -1,8 +1,16 @@
+FROM debian:stable-slim as fetcher
+
+RUN apt-get -y update && apt-get install -y curl jq wget
+RUN ["/bin/bash", "-c", "set -o pipefail \
+     && curl -sS https://api.github.com/repos/oracle/opengrok/releases \
+     | jq -er '.[0].assets[]|select(.name|startswith(\"opengrok-1.1\"))|.browser_download_url' \
+     | wget --no-verbose -i - -O opengrok.tar.gz"]
+
 FROM tomcat:9-jre8
 MAINTAINER Nathan Guimaraes "dev.nathan.guimaraes@gmail.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
-ADD https://github.com/oracle/opengrok/releases/download/1.1-rc68/opengrok-1.1-rc68.tar.gz /opengrok.tar.gz
+COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
 RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && \
     mkdir /src && \
     mkdir /data && \
