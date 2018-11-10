@@ -19,12 +19,7 @@ RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && \
     ln -s /src /var/opengrok/src
 
 #INSTALLING DEPENDENCIES
-#SSH configuration
-RUN apt-get update && apt-get install -y git subversion mercurial unzip openssh-server inotify-tools python3 python3-pip && \
-    mkdir /var/run/sshd && \
-    echo 'root:root' |chpasswd && \
-    sed -ri 's/[ #]*PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -ri 's/[ #]*UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+RUN apt-get update && apt-get install -y git subversion mercurial unzip inotify-tools python3 python3-pip && \
     python3 -m pip install /opengrok/tools/opengrok-tools*
 # compile and install universal-ctags
 RUN apt-get install -y pkg-config autoconf build-essential && git clone https://github.com/universal-ctags/ctags /root/ctags && \
@@ -63,5 +58,4 @@ RUN chmod -R +x /scripts
 # run
 WORKDIR $CATALINA_HOME
 EXPOSE 8080
-EXPOSE 22
 CMD ["/scripts/start.sh"]

@@ -32,5 +32,4 @@ start_opengrok(){
 
 #START ALL NECESSARY SERVICES.
 start_opengrok &
-catalina.sh run &
-/usr/sbin/sshd -D
+catalina.sh run
