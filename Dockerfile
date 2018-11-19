@@ -11,7 +11,7 @@ MAINTAINER OpenGrok developers "opengrok-dev@yahoogroups.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
 COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
-RUN tar -zxvf /opengrok.tar.gz && rm -f /opengrok.tar.gz && mv opengrok-* /opengrok && \
+RUN mkdir /opengrok && tar -zxvf /opengrok.tar.gz -C /opengrok --strip-components 1 && rm -f /opengrok.tar.gz && \
     mkdir /src && \
     mkdir /data && \
     mkdir -p /var/opengrok/etc/ && \
