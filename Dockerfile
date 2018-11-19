@@ -7,7 +7,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
      | wget --no-verbose -i - -O opengrok.tar.gz"]
 
 FROM tomcat:9-jre8
-MAINTAINER Nathan Guimaraes "opengrok-dev@yahoogroups.com"
+MAINTAINER OpenGrok developers "opengrok-dev@yahoogroups.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
 COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
