@@ -1,9 +1,9 @@
 # A Docker container for OpenGrok 1.1!
 
-## OpenGrok release 1.1rc68 from official source:
+## OpenGrok latest 1.1 RC from official source:
 
 Directly downloaded from official source:
-https://github.com/oracle/opengrok/releases/tag/1.1-rc68
+https://github.com/oracle/opengrok/releases/
 
 You can learn more about OpenGrok at http://oracle.github.io/opengrok/
 
