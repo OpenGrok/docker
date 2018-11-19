@@ -11,7 +11,7 @@ MAINTAINER Nathan Guimaraes "dev.nathan.guimaraes@gmail.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
 COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
-RUN tar -zxvf /opengrok.tar.gz && mv opengrok-* /opengrok && \
+RUN tar -zxvf /opengrok.tar.gz && rm -f /opengrok.tar.gz && mv opengrok-* /opengrok && \
     mkdir /src && \
     mkdir /data && \
     mkdir -p /var/opengrok/etc/ && \
