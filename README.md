@@ -1,6 +1,6 @@
 # A Docker container for OpenGrok 1.1!
 
-## OpenGrok latest 1.1 RC from official source:
+## OpenGrok 1.1 from official source:
 
 Directly downloaded from official source:
 https://github.com/oracle/opengrok/releases/
@@ -12,8 +12,8 @@ The container is available from DockerHub at https://hub.docker.com/r/opengrok/d
 ## Additional info about the container:
 
 * Tomcat 9
-* JRE 8 (Required for Opengrok 1.0+);
-* Configurable reindexing (default every 10 min);
+* JRE 8 (Required for Opengrok 1.0+)
+* Configurable reindexing (default every 10 min)
 
 ## How to run:
 
