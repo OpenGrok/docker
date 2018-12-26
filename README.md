@@ -15,6 +15,8 @@ The container is available from DockerHub at https://hub.docker.com/r/opengrok/d
 * JRE 8 (Required for Opengrok 1.0+)
 * Configurable reindexing (default every 10 min)
 
+The indexer is set so that it does not log into files.
+
 ## How to run:
 
 The container exports ports 8080 for OpenGrok.
