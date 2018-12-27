@@ -39,7 +39,11 @@ The container has OpenGrok as default web app installed (accessible directly fro
 
 http://localhost:8080/
 
-Please note: on first startup, the web interface will display an error until the indexing has been completed. Give it a few minutes and reload.
+Please note: on first startup, the web interface will display empty content
+until the indexing has been completed. Give it some time (depending on the
+amount of data indexed - might take many hours for large code bases !) and reload.
+
+The subsequent reindex will be incremental so will take signigicantly less time.
 
 ## Inspecting the container
 

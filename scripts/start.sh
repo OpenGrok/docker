@@ -14,6 +14,11 @@ start_opengrok(){
     done
     date +"%F %T Startup finished"
 
+    # populate the webapp with bare configuration
+    echo '<p><h1>Waiting on the initial reindex to finish.. Stay tuned !</h1></p>' > /data/body_include
+    /scripts/index.sh --noIndex
+    rm -f /data/body_include
+
     # initial indexing
     /scripts/index.sh
 
