@@ -11,12 +11,9 @@ MAINTAINER OpenGrok developers "opengrok-dev@yahoogroups.com"
 
 #PREPARING OPENGROK BINARIES AND FOLDERS
 COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
-RUN mkdir /opengrok && tar -zxvf /opengrok.tar.gz -C /opengrok --strip-components 1 && rm -f /opengrok.tar.gz && \
-    mkdir /src && \
-    mkdir /data && \
-    mkdir -p /var/opengrok/etc/ && \
-    ln -s /data /var/opengrok && \
-    ln -s /src /var/opengrok/src
+RUN mkdir -p /opengrok /var/opengrok/etc /opengrok/data /opengrok/src && \
+    tar -zxvf /opengrok.tar.gz -C /opengrok --strip-components 1 && \
+    rm -f /opengrok.tar.gz
 
 #INSTALLING DEPENDENCIES
 RUN apt-get update && apt-get install -y git subversion mercurial unzip inotify-tools python3 python3-pip && \
@@ -28,8 +25,8 @@ RUN apt-get install -y pkg-config autoconf build-essential && git clone https://
     cd /root && rm -rf /root/ctags
 
 #ENVIRONMENT VARIABLES CONFIGURATION
-ENV SRC_ROOT /src
-ENV DATA_ROOT /data
+ENV SRC_ROOT /opengrok/src
+ENV DATA_ROOT /opengrok/data
 ENV OPENGROK_WEBAPP_CONTEXT /
 ENV OPENGROK_TOMCAT_BASE /usr/local/tomcat
 ENV CATALINA_HOME /usr/local/tomcat
