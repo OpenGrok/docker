@@ -13,9 +13,9 @@ indexer(){
 	done
 	date +"%F %T Startup finished"
 
-	if [[ ! -d /data/index ]]; then
+	if [[ ! -d /opengrok/data/index ]]; then
 		# Populate the webapp with bare configuration.
-		BODY_INCLUDE_FILE="/data/body_include"
+		BODY_INCLUDE_FILE="/opengrok/data/body_include"
 		if [[ -f $BODY_INCLUDE_FILE ]]; then
 			mv "$BODY_INCLUDE_FILE" "$BODY_INCLUDE_FILE.orig"
 		fi

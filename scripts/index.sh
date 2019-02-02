@@ -11,7 +11,10 @@ touch $LOCKFILE
 date +"%F %T Indexing starting"
 opengrok-indexer \
     -a /opengrok/lib/opengrok.jar -- \
-    -s /src -d /data -H -P -S -G $INDEXER_OPT \
+    -s /opengrok/src \
+    -d /opengrok/data \
+    -H -P -S \
+    -G $INDEXER_OPT \
     --leadingWildCards on \
     -W /var/opengrok/etc/configuration.xml \
     -U http://localhost:8080 "$@"

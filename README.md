@@ -27,13 +27,13 @@ The indexer is set so that it does not log into files.
 
 The container exports ports 8080 for OpenGrok.
 
-    docker run -d -v <path/to/your/src>:/src -p 8080:8080 opengrok/docker:latest
+    docker run -d -v <path/to/your/src>:/opengrok/src -p 8080:8080 opengrok/docker:latest
 
-The volume mounted to `/src` should contain the projects you want to make searchable (in sub directories). You can use common revision control checkouts (git, svn, etc...) and OpenGrok will make history and blame information available.
+The volume mounted to `/opengrok/src` should contain the projects you want to make searchable (in sub directories). You can use common revision control checkouts (git, svn, etc...) and OpenGrok will make history and blame information available.
 
 By default, the index will be rebuild every ten minutes. You can adjust this time (in Minutes) by passing the `REINDEX` environment variable:
 
-    docker run -d -e REINDEX=30 -v <path/to/your/src>:/src -p 8080:8080 opengrok/docker:latest
+    docker run -d -e REINDEX=30 -v <path/to/your/src>:/opengrok/src -p 8080:8080 opengrok/docker:latest
 
 Setting `REINDEX` to `0` will disable automatic indexing. You can manually trigger an reindex using docker exec:
 
