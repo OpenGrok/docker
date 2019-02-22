@@ -3,7 +3,7 @@ FROM debian:stable-slim as fetcher
 RUN apt-get -y update && apt-get install -y curl jq wget
 RUN ["/bin/bash", "-c", "set -o pipefail \
      && curl -sS https://api.github.com/repos/oracle/opengrok/releases \
-     | jq -er '.[0].assets[]|select(.name|startswith(\"opengrok-1.1\"))|.browser_download_url' \
+     | jq -er '.[0].assets[]|select(.name|test(\"opengrok-.*tar.gz\"))|.browser_download_url' \
      | wget --no-verbose -i - -O opengrok.tar.gz"]
 
 FROM tomcat:9-jre8
