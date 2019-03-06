@@ -33,6 +33,14 @@ Setting `REINDEX` to `0` will disable automatic indexing. You can manually trigg
 
     docker exec <container> /scripts/index.sh
 
+Setting `INDEXER_OPT` could pass extra options to opengrok-indexer. For example, you can run with:
+
+    docker run -d -e INDEXER_OPT="-i d:vendor" -v <path/to/your/src>:/src -p 8080:8080 opengrok/docker:latest
+
+To remove all the `*/vendor/*` files from the index. You can check the indexer options on
+
+https://github.com/oracle/opengrok/wiki/Python-scripts-transition-guide
+
 ## OpenGrok Web-Interface
 
 The container has OpenGrok as default web app installed (accessible directly from `/`). With the above container setup, you can find it running on
