@@ -13,7 +13,7 @@ The container is available from DockerHub at https://hub.docker.com/r/opengrok/d
 
 This image is simple wrapper around OpenGrok environment. The indexer and the web container are **not** tuned for large workloads. If you happen to have either large source data (e.g. [AOSP](https://en.wikipedia.org/wiki/Android_Open_Source_Project) or the like) or stable service or both, it is advisable to run the service standalone.
 
-Also, the image is not capable of source data synchronization. This means the inconsistency time window when index is not consistent with source data can be quite large. This can lead to problems.
+Also, the image is not capable of source data synchronization. This means the inconsistency time window when index is not consistent with source data can be quite large. This can lead to problems. It is recommended to run the indexer (see below on how to do that) immediately after source data is changed.
 
 ## Additional info about the container:
 
