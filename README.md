@@ -1,6 +1,6 @@
-# A Docker container for OpenGrok 1.1!
+# A Docker container for OpenGrok
 
-## OpenGrok 1.1 from official source:
+## OpenGrok from official source:
 
 Directly downloaded from official source:
 https://github.com/oracle/opengrok/releases/
