@@ -1,3 +1,5 @@
+[![Travis status](https://travis-ci.org/OpenGrok/docker.svg?branch=master)](https://travis-ci.org/OpenGrok/docker)
+
 # A Docker container for OpenGrok
 
 ## OpenGrok from official source:
