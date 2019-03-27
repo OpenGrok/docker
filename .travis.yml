@@ -2,7 +2,7 @@ language: bash
 dist: xenial
 services:
 - docker
-before_install: apt-get -y update && apt-get install -y curl jq wget
+before_install: sudo apt-get -y update && sudo apt-get install -y curl jq wget
 script: docker.sh
 env:
   global:
