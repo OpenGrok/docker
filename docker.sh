@@ -6,13 +6,13 @@
 
 set -e
 
-docker build -t opengrok/docker .
-docker run -d opengrok/docker
-docker ps -a
-
 # Get the latest OpenGrok version string.
 VERSION=`curl -sS https://api.github.com/repos/oracle/opengrok/releases/latest | jq -er .tag_name`
 echo "Latest OpenGrok tag: $VERSION"
+
+docker build -t opengrok/docker:$VERSION .
+docker run -d opengrok/docker
+docker ps -a
 
 # The DOCKER_* variables are setup via https://travis-ci.com/OpenGrok/docker/settings
 if [ -n "$DOCKER_PASSWORD" -a -n "$DOCKER_USERNAME" -a -n "$VERSION" ]; then
