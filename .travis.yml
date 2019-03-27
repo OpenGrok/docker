@@ -1,11 +1,10 @@
 language: bash
-
 dist: xenial
-
 services:
-  - docker
-
-before_install:
-  - docker build -t opengrok/docker .
-  - docker run -d opengrok/docker
-  - docker ps -a
+- docker
+before_install: apt-get -y update && apt-get install -y curl jq wget
+script: docker.sh
+env:
+  global:
+  - secure: S9ORgS7nEPUrwCKr2DYx/SsAxJEamzduLUo7bzawUforRFHj3HbCNPTzWplDGyxDaknF+Pa5L24bZihGjc/8gyVmwds6tiNDLX25VGT5nDqWOoIaJl2lNRsSMBdnA2ObAfpxoK+q29L7vJrWCxO+8+4I+vNCEaIu8UNDqCBnncddRfm91QJlFW8I1ECHuH0h1Dp3hmN7m27JCHHdRWMAc3drGcr6PubMhhoqwlv8pIPK6pmLvGSKysV7R+rolfl0Y+XTocaMmrbSAR5ycnJtrMN/hInjkfa1oEZlddMY/UNU7o2G6Un1xU4+aZCN7GnnmrqswK68OcSTdNcsY7TBgEigB6U7et6e9VAXM8AGl2ienn1SstgWZYXQliwQ/D6PlfyytPrewwKMurEv1+CkSPZwv8mnsGAtFULqMV4WeAZhhlkGJ/XOxntZUZ0r4EK/V0Bb8C+FoSw3hQ/Z/GJRoB7Zx+8mNfECLcGJV1nG4Cu7GfcjlqP3jxkyFM39Rxs5CCl0Y/qMDPq7qvyNUzGTuBzcFm+RgZO5y9KLcfMl2FpY5dwSlceN1OodXeOg90KSO8eFwKFnF035NepZ/LnqWfuqAxZ7JF/u8zYEZaacPYrqSmyojvNwwxm0MANtVA17Nqledr4sIfKLJBaGCM1qaIVP2Pb4tyWV9yG+cBdzthE=
+  - secure: krw/Kt3/f3oFUivbqIlE7lYIk80tDdfVLD0UrI9iLki48ufHQOn31Lc95P1l0k4qq9XKBcP3SKQfyBPIAGmfqKQ7Y4v6wIWmdjEb6Ohrf6RAYZem+iqsMKzHgCkhfDYbsh0qAvbDo7rRhaIMM+GZ9/qRinK/KWrtOhXFaG8zJPza1GaneXAgx6lYAYY3/WtxKJ5LbvmNSYMh+TAxAv9zEGAroRIBS4N9SqnMMBSLassgbgSrUNtFxCaMNekjoM5e7666zM4WW4ve6w++iTUg3byAkSMSnZWp621iNkBAjloBiPepxsjbNypZUEmRHJefsJ3o8uzkjg9QZGnZrfARThnf+uOJFOPFGeHv9A+ihPkOSuxTJAA7WtzQfB+br5WhcvQ/t5bAcB7V5BbDiaSNY5gteQBQ6T2ZBRb1SopFFcrNBbmFnhjJQD3BfT130NmEy+S1rhowERuKUAGXY+uuVo0Zd1jm2McQv2Z9x6hvz5P7jn3Kqk5GWdFXEVCPEN+BGhu5lhoJpnO3nwWpRriqpGbBvJF64DzuSVxydGdluvcqtakQelAaTt9BJBdIfVnEraY7wm9pSf1TXiVakVTLpr2zuN9vHZe4stb9h6S81HbJJKJciIaCt5HV4UOBwLwGpn+eY5+nYrVmV4vqxDsmHPJMGZZT+7lN81WqeMlAUQ8=
