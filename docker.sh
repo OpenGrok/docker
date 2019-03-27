@@ -4,6 +4,7 @@
 # Build and push new image to Docker hub.
 #
 
+set -x
 set -e
 
 # Get the latest OpenGrok version string.
