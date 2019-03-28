@@ -11,7 +11,7 @@ set -e
 VERSION=`curl -sS https://api.github.com/repos/oracle/opengrok/releases/latest | jq -er .tag_name`
 echo "Latest OpenGrok tag: $VERSION"
 
-docker build -t opengrok/docker:$VERSION -t opengrok/docker:latest .
+docker build -t opengrok/docker:$VERSION .
 docker run -d opengrok/docker
 docker ps -a
 
