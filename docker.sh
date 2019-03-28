@@ -8,7 +8,9 @@ set -x
 set -e
 
 # Get the latest OpenGrok version string.
-VERSION=`curl -sS https://api.github.com/repos/oracle/opengrok/releases/latest | jq -er .tag_name`
+curl -sS -o ver.out https://api.github.com/repos/oracle/opengrok/releases/latest
+cat ver.out
+VERSION=`jq -er .tag_name ver.out`
 echo "Latest OpenGrok tag: $VERSION"
 
 docker build -t opengrok/docker:$VERSION -t opengrok/docker:latest .
