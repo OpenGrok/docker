@@ -28,7 +28,7 @@ VERSION=`jq -er .tag_name ver.out`
 echo "Latest OpenGrok tag: $VERSION"
 
 # Embed the tarball URL into the Dockerfile.
-tarball=`jq -er '.[0].assets[]|select(.name|test(\"opengrok-.*tar.gz\"))|.browser_download_url' "$JSON_OUT"`
+tarball=`jq -er '.assets[]|select(.name|test("opengrok-.*tar.gz"))|.browser_download_url' "$JSON_OUT"`
 echo "Tarball URL: $tarball"
 sed --in-place "s/OPENGROK_DOWNLOAD_LINK/$tarball/" Dockerfile
 
