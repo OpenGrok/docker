@@ -30,7 +30,7 @@ echo "Latest OpenGrok tag: $VERSION"
 # Embed the tarball URL into the Dockerfile.
 tarball=`jq -er '.assets[]|select(.name|test("opengrok-.*tar.gz"))|.browser_download_url' "$JSON_OUT"`
 echo "Tarball URL: $tarball"
-sed --in-place "s%OPENGROK_DOWNLOAD_LINK%$tarball%" Dockerfile
+sed "s%OPENGROK_DOWNLOAD_LINK%$tarball%" Dockerfile.tmpl > Dockerfile
 
 # Build and run the image in container.
 docker build -t opengrok/docker:$VERSION -t opengrok/docker:latest .
