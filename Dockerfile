@@ -4,6 +4,7 @@ FROM tomcat:9-jre8
 MAINTAINER OpenGrok developers "opengrok-dev@yahoogroups.com"
 
 RUN apt-get -y update && apt-get install -y curl
+# The 'OPENGROK_DOWNLOAD_LINK' will be replaced by docker.sh.
 RUN curl -sS OPENGROK_DOWNLOAD_LINK -o opengrok.tar.gz
 
 # prepare OpenGrok binaries and directories
