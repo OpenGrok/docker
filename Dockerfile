@@ -1,21 +1,18 @@
 FROM debian:stable-slim as fetcher
 
-RUN apt-get -y update && apt-get install -y curl jq wget
-RUN ["/bin/bash", "-c", "set -o pipefail \
-     && curl -sS https://api.github.com/repos/oracle/opengrok/releases \
-     | jq -er '.[0].assets[]|select(.name|test(\"opengrok-.*tar.gz\"))|.browser_download_url' \
-     | wget --no-verbose -i - -O opengrok.tar.gz"]
-
 FROM tomcat:9-jre8
 MAINTAINER OpenGrok developers "opengrok-dev@yahoogroups.com"
 
-#PREPARING OPENGROK BINARIES AND FOLDERS
+RUN apt-get -y update && apt-get install -y curl
+RUN curl -sS OPENGROK_DOWNLOAD_LINK -o opengrok.tar.gz
+
+# prepare OpenGrok binaries and directories
 COPY --from=fetcher opengrok.tar.gz /opengrok.tar.gz
 RUN mkdir -p /opengrok /var/opengrok/etc /opengrok/data /opengrok/src && \
     tar -zxvf /opengrok.tar.gz -C /opengrok --strip-components 1 && \
     rm -f /opengrok.tar.gz
 
-#INSTALLING DEPENDENCIES
+# install dependencies
 RUN apt-get update && apt-get install -y git subversion mercurial unzip inotify-tools python3 python3-pip && \
     python3 -m pip install /opengrok/tools/opengrok-tools*
 # compile and install universal-ctags
@@ -24,7 +21,7 @@ RUN apt-get install -y pkg-config autoconf build-essential && git clone https://
     apt-get remove -y autoconf build-essential && apt-get -y autoremove && apt-get -y autoclean && \
     cd /root && rm -rf /root/ctags
 
-#ENVIRONMENT VARIABLES CONFIGURATION
+# environment variables
 ENV SRC_ROOT /opengrok/src
 ENV DATA_ROOT /opengrok/data
 ENV OPENGROK_WEBAPP_CONTEXT /
