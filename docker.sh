@@ -3,12 +3,19 @@
 #
 # Build and push new image to Docker hub.
 #
+# Uses the following Travis secure variables:
+#  - DOCKER_USERNAME
+#  - DOCKER_PASSWORD
+#  - GITHUB_TOKEN
+#
 
 set -x
 set -e
 
 # Get the latest OpenGrok version string.
-curl -sS -o ver.out https://api.github.com/repos/oracle/opengrok/releases/latest
+curl -sS -o ver.out \
+    -H "Authorization: token $GITHUB_TOKEN" \
+    https://api.github.com/repos/oracle/opengrok/releases/latest
 cat ver.out
 VERSION=`jq -er .tag_name ver.out`
 echo "Latest OpenGrok tag: $VERSION"
