@@ -43,7 +43,7 @@ Setting `REINDEX` to `0` will disable automatic indexing. You can manually trigg
 
 Setting `INDEXER_OPT` could pass extra options to opengrok-indexer. For example, you can run with:
 
-    docker run -d -e INDEXER_OPT="-i d:vendor" -v <path/to/your/src>:/src -p 8080:8080 opengrok/docker:latest
+    docker run -d -e INDEXER_OPT="-i d:vendor" -v <path/to/your/src>:/opengrok/src -p 8080:8080 opengrok/docker:latest
 
 To remove all the `*/vendor/*` files from the index. You can check the indexer options on
 
