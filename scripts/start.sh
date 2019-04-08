@@ -27,7 +27,7 @@ indexer(){
 		fi
 
 		# Perform initial indexing.
-		/scripts/index.sh
+		NOMIRROR=1 /scripts/index.sh
 		date +"%F %T Initial reindex finished"
 	fi
 
