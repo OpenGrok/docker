@@ -14,6 +14,11 @@
 set -x
 set -e
 
+# Travis can only work on master since it needs encrypted variables.
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+	exit 0
+fi
+
 JSON_OUT="ver.out"
 
 #
