@@ -54,6 +54,10 @@ https://github.com/oracle/opengrok/wiki/Python-scripts-transition-guide
 
 To avoid the mirroring step, set the `NOMIRROR` variable to non-empty value.
 
+To display Indexer logs, use:
+
+    docker logs <container_name>
+
 ## OpenGrok Web-Interface
 
 The container has OpenGrok as default web app installed (accessible directly from `/`). With the above container setup, you can find it running on
