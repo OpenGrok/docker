@@ -1,4 +1,5 @@
-[![Travis status](https://travis-ci.com/OpenGrok/docker.svg?branch=master)](https://travis-ci.com/OpenGrok/docker)
+
+:heavy_exclamation_mark: **NOTE: This repository is archived. It is no longer used to build official OpenGrok Docker images. These are now built from within the official OpenGrok source repository. The location of the images on Docker Hub remains the same. It is just the build process that changed.**
 
 # A Docker container for OpenGrok
 
