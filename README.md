@@ -1,5 +1,5 @@
 
-:heavy_exclamation_mark: **NOTE: This repository is archived. It is no longer used to build official OpenGrok Docker images. These are now built from within the official OpenGrok source repository. The location of the images on Docker Hub remains the same. It is just the build process that changed.**
+:heavy_exclamation_mark: :raising_hand_man: **NOTE: This repository is archived. It is no longer used to build official OpenGrok Docker images. These are now built from within the official OpenGrok source repository. The location of the images on Docker Hub remains the same. It is just the build process that changed. See https://github.com/oracle/opengrok/tree/master/docker for more details.**
 
 # A Docker container for OpenGrok
 
